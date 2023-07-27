@@ -16,6 +16,7 @@
 
 let entry_list = document.getElementById('entries');
 let dataUrl = 'http://localhost:3000/diaryEntries'
+let postForm = document.getElementById('postForm')
 //Get
 fetch (dataUrl)
 .then (response => response.json())
@@ -35,3 +36,41 @@ let displayScreen = (data) => {
 
     })
 }
+//POST
+
+//Posting our experiences
+//function
+    //access the input values and store as variables
+    //fetch
+        //define method
+            //define headers and body
+    //convert to json
+
+let addDiaryEntry = (event) => {
+    event.preventDefault();
+
+
+    let title = document.getElementById('title').value
+    let date = document.getElementById('date').value
+    let experience = document.getElementById('experience').value
+    
+
+    const entryObj ={
+        title: title,
+        date: date,
+        content: experience
+    }
+
+    fetch(dataUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(entryObj)
+    })
+    .then (res => res.json())
+    .then (data => console.log(data));
+
+
+}
+postForm.addEventListener('click',addDiaryEntry);
